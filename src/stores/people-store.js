@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref, reactive } from "vue";
+import { ref } from "vue";
 import { api } from "src/boot/axios";
 
 export const usePeopleStore = defineStore("people", () => {
@@ -9,27 +9,29 @@ export const usePeopleStore = defineStore("people", () => {
   const people = ref([]);
   const rowsPerPageOptions = ref([rowsPerPage]);
   const isLoading = ref(false);
-  const pagination = reactive({
-    rowsPerPage: rowsPerPage,
-    rowsNumber: 0,
+  const pagination = ref({
     page: 1,
+    rowsNumber: 0,
+    rowsPerPage: rowsPerPage,
   });
 
   //actions
-  async function fetchPeople() {
-    try {
-      isLoading.value = true;
-      const { data } = await api.get(`people/?page=${pagination.page}`);
+  const fetchPeople = (page = 1) => {
+    isLoading.value = true;
+    return api
+      .get(`people/?page=${page}`)
+      .then((response) => {
+        const { data } = response;
 
-      pagination.rowsNumber = data.count;
+        people.value = data.results;
 
-      people.value = [...data.results];
-    } catch (error) {
-      console.log(error);
-    } finally {
-      isLoading.value = false;
-    }
-  }
+        pagination.value.page = page;
+        pagination.value.rowsNumber = data.count;
+      })
+      .finally(() => {
+        isLoading.value = false;
+      });
+  };
 
   return { people, rowsPerPageOptions, pagination, isLoading, fetchPeople };
 });

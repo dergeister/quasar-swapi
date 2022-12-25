@@ -2,14 +2,15 @@
   <q-table
     :title="$t('resources.films.title')"
     :columns="columns"
-    :rows="filmsList"
+    :rows="films"
     :rows-per-page-label="$t('table.rowsPerPageLabel')"
     :rows-per-page-options="rowsPerPageOptions"
     row-key="title"
-    :pagination="pagination"
+    v-model:pagination="pagination"
     :pagination-label="paginationLabel"
     :loading="isLoading"
     :loading-label="$t('table.loadingLabel')"
+    @request="onRequest"
   >
     <template v-slot:loading>
       <q-inner-loading showing color="primary" />
@@ -24,7 +25,7 @@
   </q-table>
 </template>
 <script>
-import { defineComponent, computed } from "vue";
+import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 import { useFilmsStore } from "src/stores/films-store";
 import { storeToRefs } from "pinia";
@@ -36,7 +37,7 @@ export default defineComponent({
     const { t } = useI18n();
     const filmsStore = useFilmsStore();
 
-    const { films, rowsPerPageOptions, isLoading, pagination } =
+    const { films, pagination, rowsPerPageOptions, isLoading } =
       storeToRefs(filmsStore);
 
     const columns = [
@@ -75,35 +76,23 @@ export default defineComponent({
       });
     }
 
+    const onRequest = (requestProps) => {
+      const { page } = requestProps.pagination;
+
+      filmsStore.fetchFilms(page);
+    };
+
+    filmsStore.fetchFilms();
+
     return {
-      filmsStore,
+      films,
       rowsPerPageOptions,
       isLoading,
-      columns,
       pagination,
+      columns,
       paginationLabel,
-      filmsList: computed(() => {
-        const mappedFilms = films.value.map((film) => {
-          return { ...film };
-        });
-        return mappedFilms;
-      }),
-      // rowsPerPageOptionsList: computed(() => {
-      //   const mappedOptions = rowsPerPageOptions.value.map((option) => {
-      //     return { ...option };
-      //   });
-      //   return mappedOptions;
-      // }),
+      onRequest,
     };
-  },
-  async mounted() {
-    // const mappedOptions = this.rowsPerPageOptions.value.map((option) => {
-    //   return { ...option };
-    // });
-
-    // console.log(mappedOptions);
-
-    await this.filmsStore.fetchFilms();
   },
 });
 </script>

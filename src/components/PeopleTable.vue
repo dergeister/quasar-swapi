@@ -15,7 +15,7 @@
     <template v-slot:loading>
       <q-inner-loading showing color="primary" />
     </template>
-    <template v-slot:body-cell-title="props">
+    <template v-slot:body-cell-name="props">
       <q-td :props="props">
         <div class="tableClickable">
           {{ props.value }}
@@ -25,47 +25,19 @@
   </q-table>
 </template>
 <script>
-import { defineComponent, computed, ref } from "vue";
+import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 import { usePeopleStore } from "src/stores/people-store";
 import { storeToRefs } from "pinia";
-import { api } from "src/boot/axios";
 
 export default defineComponent({
   name: "FilmsTable",
   setup() {
     const { t } = useI18n();
-    const people = ref([]);
-    const rowsPerPageOptions = ref([10]);
-    const isLoading = ref(false);
-    const pagination = ref({
-      page: 1,
-      rowsPerPage: 10,
-      rowsNumber: 0,
-    });
 
-    const fetchPeople = (page = 1) => {
-      isLoading.value = true;
-      return api
-        .get(`people/?page=${page}`)
-        .then((response) => {
-          const { data } = response;
-
-          people.value = data.results;
-
-          pagination.value.rowsNumber = data.count;
-          pagination.value.page = page;
-        })
-        .finally(() => {
-          isLoading.value = false;
-        });
-    };
-
-    // const peopleStore = usePeopleStore();
-
-    // const { people, rowsPerPageOptions, isLoading } = storeToRefs(peopleStore);
-
-    // const pagination = peopleStore.pagination;
+    const peopleStore = usePeopleStore();
+    const { people, pagination, rowsPerPageOptions, isLoading } =
+      storeToRefs(peopleStore);
 
     const columns = [
       {
@@ -93,20 +65,19 @@ export default defineComponent({
     const onRequest = (requestProps) => {
       const { page } = requestProps.pagination;
 
-      fetchPeople(page);
+      peopleStore.fetchPeople(page);
     };
 
-    fetchPeople();
+    peopleStore.fetchPeople();
 
     return {
       people,
       rowsPerPageOptions,
       isLoading,
-      columns,
       pagination,
+      columns,
       paginationLabel,
       onRequest,
-      fetchPeople,
     };
   },
 });
