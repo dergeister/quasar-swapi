@@ -2,11 +2,11 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { api } from "src/boot/axios";
 
-export const useFilmsStore = defineStore("films", () => {
+export const usePlanetsStore = defineStore("planets", () => {
   const rowsPerPage = 10;
 
   //state
-  const films = ref([]);
+  const planets = ref([]);
   const rowsPerPageOptions = ref([rowsPerPage]);
   const isLoading = ref(false);
   const pagination = ref({
@@ -16,14 +16,14 @@ export const useFilmsStore = defineStore("films", () => {
   });
 
   //actions
-  const fetchFilms = (page = 1) => {
+  const fetchPlanets = (page = 1) => {
     isLoading.value = true;
     return api
-      .get(`films/?page=${page}`)
+      .get(`planets/?page=${page}`)
       .then((response) => {
         const { data } = response;
 
-        films.value = data.results;
+        planets.value = data.results;
 
         pagination.value.page = page;
         pagination.value.rowsNumber = data.count;
@@ -33,5 +33,5 @@ export const useFilmsStore = defineStore("films", () => {
       });
   };
 
-  return { films, rowsPerPageOptions, pagination, isLoading, fetchFilms };
+  return { planets, rowsPerPageOptions, pagination, isLoading, fetchPlanets };
 });
