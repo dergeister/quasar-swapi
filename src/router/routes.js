@@ -12,6 +12,10 @@ const routes = [
         path: "films",
         component: () => import("pages/Resources/FilmsPage.vue"),
       },
+      {
+        path: "people",
+        component: () => import("src/pages/Resources/PeoplePage.vue"),
+      },
     ],
   },
 

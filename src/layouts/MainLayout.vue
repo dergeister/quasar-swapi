@@ -1,6 +1,23 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-drawer :v-model="true" show-if-above bordered>
+    <q-header elevated>
+      <q-toolbar>
+        <q-btn
+          flat
+          dense
+          round
+          icon="menu"
+          aria-label="Menu"
+          @click="toggleLeftDrawer"
+        />
+
+        <q-toolbar-title>
+          {{ $t("header.title") }}
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-header>
+
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
         <q-item-label header class="text-weight-bold">
           {{ $t("sidebar.title") }}
@@ -14,14 +31,14 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container class="column">
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import SidebarResource from "src/components/SidebarResource.vue";
 import sidebarResources from "../helpers/sidebar-resources";
 
@@ -33,8 +50,14 @@ export default defineComponent({
   },
 
   setup() {
+    const leftDrawerOpen = ref(false);
+
     return {
-      sidebarResources: sidebarResources,
+      leftDrawerOpen,
+      toggleLeftDrawer() {
+        leftDrawerOpen.value = !leftDrawerOpen.value;
+      },
+      sidebarResources,
     };
   },
 });

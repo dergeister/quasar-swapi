@@ -5,7 +5,11 @@ import { api } from "src/boot/axios";
 export const useFilmsStore = defineStore("films", () => {
   //state
   const films = ref([]);
+  const rowsPerPageOptions = ref([10]);
   const isLoading = ref(false);
+  const pagination = ref({
+    rowsPerPage: 10,
+  });
 
   //actions
   async function fetchFilms() {
@@ -14,8 +18,6 @@ export const useFilmsStore = defineStore("films", () => {
       const { data } = await api.get("films/");
 
       films.value = [...data.results];
-
-      console.log(films.value);
     } catch (error) {
       console.log(error);
     } finally {
@@ -23,5 +25,5 @@ export const useFilmsStore = defineStore("films", () => {
     }
   }
 
-  return { films, isLoading, fetchFilms };
+  return { films, rowsPerPageOptions, pagination, isLoading, fetchFilms };
 });

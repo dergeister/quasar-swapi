@@ -15,7 +15,7 @@ const sidebarResources = [
     title: "resources.people.title",
     caption: "quasar.dev",
     icon: "diversity_3",
-    link: "https://quasar.dev",
+    link: "/resources/people",
   },
   {
     title: "resources.planets.title",

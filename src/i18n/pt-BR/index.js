@@ -18,6 +18,8 @@ export default {
     },
     people: {
       title: "Pessoas",
+      name: "Nome",
+      birthYear: "Ano de Nascimento",
     },
     planets: {
       title: "Planetas",

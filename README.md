@@ -1,41 +1,14 @@
-# Quasar SWAPI (quasar-swapi)
+# Quasar SWAPI
 
-Projeto para praticar utilização do framework quasar V2
+## Descrição
 
-## Install the dependencies
-```bash
-yarn
-# or
-npm install
-```
+Este projeto tem a finalidade de praticar as seguintes tecnologias:
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
+- Quasar 2
+- Vue 3
+- Composition Api
+- Pinia
 
+Eu já havia utilizado profissionalmente Quasar 1 e Vue 2 e estava querendo aprender as novas versões, também queria praticar a Composition API e o Pinia, sucessor do Vuex.
 
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-
-### Format the files
-```bash
-yarn format
-# or
-npm run format
-```
-
-
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js).
+A ideia é fazer um catalogo para o Star Wars API utilizando as tecnologias citadas acima.

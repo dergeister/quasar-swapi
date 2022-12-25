@@ -2,9 +2,9 @@
   <q-table
     :title="$t('resources.films.title')"
     :columns="columns"
-    :rows="tableRows"
+    :rows="filmsList"
     :rows-per-page-label="$t('table.rowsPerPageLabel')"
-    :rows-per-page-options="[10, 20, 30]"
+    :rows-per-page-options="rowsPerPageOptions"
     row-key="title"
     :pagination="pagination"
     :pagination-label="paginationLabel"
@@ -16,7 +16,7 @@
     </template>
     <template v-slot:body-cell-title="props">
       <q-td :props="props">
-        <div clickable tag="a">
+        <div class="tableClickable">
           {{ props.value }}
         </div>
       </q-td>
@@ -30,17 +30,14 @@ import { useFilmsStore } from "src/stores/films-store";
 import { storeToRefs } from "pinia";
 import moment from "moment";
 
-const pagination = {
-  rowsPerPage: 10,
-};
-
 export default defineComponent({
   name: "FilmsTable",
   setup() {
     const { t } = useI18n();
     const filmsStore = useFilmsStore();
 
-    const { films, isLoading } = storeToRefs(filmsStore);
+    const { films, rowsPerPageOptions, isLoading, pagination } =
+      storeToRefs(filmsStore);
 
     const columns = [
       {
@@ -80,19 +77,32 @@ export default defineComponent({
 
     return {
       filmsStore,
-      columns,
+      rowsPerPageOptions,
       isLoading,
+      columns,
       pagination,
       paginationLabel,
-      tableRows: computed(() => {
+      filmsList: computed(() => {
         const mappedFilms = films.value.map((film) => {
           return { ...film };
         });
         return mappedFilms;
       }),
+      // rowsPerPageOptionsList: computed(() => {
+      //   const mappedOptions = rowsPerPageOptions.value.map((option) => {
+      //     return { ...option };
+      //   });
+      //   return mappedOptions;
+      // }),
     };
   },
   async mounted() {
+    // const mappedOptions = this.rowsPerPageOptions.value.map((option) => {
+    //   return { ...option };
+    // });
+
+    // console.log(mappedOptions);
+
     await this.filmsStore.fetchFilms();
   },
 });
