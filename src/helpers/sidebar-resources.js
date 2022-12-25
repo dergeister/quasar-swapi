@@ -1,10 +1,10 @@
 const sidebarResources = [
-  // {
-  //   title: "resources.home.title",
-  //   caption: "quasar.dev",
-  //   icon: "home",
-  //   link: "https://quasar.dev",
-  // },
+  {
+    title: "resources.home.title",
+    caption: "quasar.dev",
+    icon: "home",
+    link: "/",
+  },
   {
     title: "resources.films.title",
     caption: "quasar.dev",
@@ -21,25 +21,25 @@ const sidebarResources = [
     title: "resources.planets.title",
     caption: "quasar.dev",
     icon: "public",
-    link: "https://quasar.dev",
+    link: "/resources/planets",
   },
   {
     title: "resources.species.title",
     caption: "quasar.dev",
     icon: "pets",
-    link: "https://quasar.dev",
+    link: "/resources/species",
   },
   {
     title: "resources.starships.title",
     caption: "quasar.dev",
     icon: "rocket_launch",
-    link: "https://quasar.dev",
+    link: "/resources/starships",
   },
   {
     title: "resources.vehicles.title",
     caption: "quasar.dev",
     icon: "snowmobile",
-    link: "https://quasar.dev",
+    link: "/resources/vehicles",
   },
 ];
 

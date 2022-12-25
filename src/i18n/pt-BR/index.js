@@ -23,6 +23,9 @@ export default {
     },
     planets: {
       title: "Planetas",
+      name: "Nome",
+      population: "População",
+      terrain: "Terreno",
     },
     species: {
       title: "Espécies",

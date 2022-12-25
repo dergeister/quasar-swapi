@@ -16,6 +16,10 @@ const routes = [
         path: "people",
         component: () => import("src/pages/Resources/PeoplePage.vue"),
       },
+      {
+        path: "planets",
+        component: () => import("src/pages/Resources/PlanetsPage.vue"),
+      },
     ],
   },
 
