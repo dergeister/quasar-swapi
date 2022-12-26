@@ -29,6 +29,10 @@ export default {
     },
     species: {
       title: "Espécies",
+      name: "Nome",
+      classification: "Classificação",
+      designation: "Designação",
+      language: "Idioma",
     },
     starships: {
       title: "Naves Espaciais",

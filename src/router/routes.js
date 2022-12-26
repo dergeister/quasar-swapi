@@ -20,11 +20,12 @@ const routes = [
         path: "planets",
         component: () => import("src/pages/Resources/PlanetsPage.vue"),
       },
+      {
+        path: "species",
+        component: () => import("src/pages/Resources/SpeciesPage.vue"),
+      },
     ],
   },
-
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: "/:catchAll(.*)*",
     component: () => import("pages/ErrorNotFound.vue"),

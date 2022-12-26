@@ -31,7 +31,7 @@ import { usePeopleStore } from "src/stores/people-store";
 import { storeToRefs } from "pinia";
 
 export default defineComponent({
-  name: "FilmsTable",
+  name: "PeopleTable",
   setup() {
     const { t } = useI18n();
 
