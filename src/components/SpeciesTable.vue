@@ -1,8 +1,8 @@
 <template>
   <q-table
-    :title="$t('resources.planets.title')"
+    :title="$t('resources.species.title')"
     :columns="columns"
-    :rows="planets"
+    :rows="species"
     :rows-per-page-label="$t('table.rowsPerPageLabel')"
     :rows-per-page-options="rowsPerPageOptions"
     row-key="title"
@@ -27,36 +27,42 @@
 <script>
 import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
-import { usePlanetsStore } from "src/stores/planets-store";
+import { useSpeciesStore } from "src/stores/species-store";
 import { storeToRefs } from "pinia";
 
 export default defineComponent({
-  name: "PlanetsTable",
+  name: "SpeciesTable",
   setup() {
     const { t } = useI18n();
 
-    const planetsStore = usePlanetsStore();
-    const { planets, pagination, rowsPerPageOptions, isLoading } =
-      storeToRefs(planetsStore);
+    const speciesStore = useSpeciesStore();
+    const { species, pagination, rowsPerPageOptions, isLoading } =
+      storeToRefs(speciesStore);
 
     const columns = [
       {
         name: "name",
-        label: t("resources.planets.name"),
+        label: t("resources.species.name"),
         align: "left",
         field: "name",
       },
       {
-        name: "population",
+        name: "classification",
         align: "left",
-        label: t("resources.planets.population"),
-        field: "population",
+        label: t("resources.species.classification"),
+        field: "classification",
       },
       {
-        name: "terrain",
+        name: "designation",
         align: "left",
-        label: t("resources.planets.terrain"),
-        field: "terrain",
+        label: t("resources.species.designation"),
+        field: "designation",
+      },
+      {
+        name: "language",
+        align: "left",
+        label: t("resources.species.language"),
+        field: "language",
       },
     ];
 
@@ -71,13 +77,13 @@ export default defineComponent({
     const onRequest = (requestProps) => {
       const { page } = requestProps.pagination;
 
-      planetsStore.fetchPlanets(page);
+      speciesStore.fetchSpecies(page);
     };
 
-    planetsStore.fetchPlanets();
+    speciesStore.fetchSpecies();
 
     return {
-      planets,
+      species,
       rowsPerPageOptions,
       isLoading,
       pagination,
