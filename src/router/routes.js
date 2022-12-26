@@ -28,6 +28,10 @@ const routes = [
         path: "starships",
         component: () => import("src/pages/Resources/StarshipsPage.vue"),
       },
+      {
+        path: "vehicles",
+        component: () => import("src/pages/Resources/VehiclesPage.vue"),
+      },
     ],
   },
   {
