@@ -24,6 +24,10 @@ const routes = [
         path: "species",
         component: () => import("src/pages/Resources/SpeciesPage.vue"),
       },
+      {
+        path: "starships",
+        component: () => import("src/pages/Resources/StarshipsPage.vue"),
+      },
     ],
   },
   {
