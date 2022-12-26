@@ -43,6 +43,10 @@ export default {
     },
     vehicles: {
       title: "Veículos",
+      name: "Nome",
+      model: "Modelo",
+      crew: "Tripulação",
+      passengers: "Passageiros",
     },
   },
   table: {
