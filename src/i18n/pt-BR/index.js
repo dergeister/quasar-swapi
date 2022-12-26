@@ -35,7 +35,11 @@ export default {
       language: "Idioma",
     },
     starships: {
-      title: "Naves Espaciais",
+      title: "Naves Estelares",
+      name: "Nome",
+      model: "Modelo",
+      crew: "Tripulação",
+      passengers: "Passageiros",
     },
     vehicles: {
       title: "Veículos",
