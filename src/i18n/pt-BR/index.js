@@ -18,6 +18,12 @@ export default {
       director: "Diretor",
       producer: "Produtor",
       characters: "Personagens",
+      seeCrawlingText: "Ver texto de abertura",
+      seeCharacters: "Ver Personagens",
+      seePlanets: "Ver Planetas",
+      seeSpecies: "Ver Espécies",
+      seeStarships: "Ver Naves Estelares",
+      seeVehicles: "Ver Veículos",
     },
     people: {
       title: "Pessoas",

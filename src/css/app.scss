@@ -9,6 +9,19 @@
   }
 }
 
-.card-row {
-  margin-bottom: 1rem;
+.data-card {
+  min-width: 500px;
+
+  .card-row:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  .column {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+.data-card-list {
+  min-width: 250px;
 }
