@@ -1,8 +1,14 @@
 // app global css in SCSS form
-.tableClickable {
-  cursor: pointer;
-
-  &:hover {
-    color: $primary;
+.q-table {
+  tbody {
+    tr:hover {
+      cursor: pointer;
+      background-color: $primary;
+      color: white;
+    }
   }
+}
+
+.card-row {
+  margin-bottom: 1rem;
 }

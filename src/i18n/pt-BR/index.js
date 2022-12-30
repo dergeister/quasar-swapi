@@ -15,6 +15,9 @@ export default {
       name: "Título",
       episode: "Episódio",
       releaseDate: "Data de Lançamento",
+      director: "Diretor",
+      producer: "Produtor",
+      characters: "Personagens",
     },
     people: {
       title: "Pessoas",

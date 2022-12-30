@@ -74,7 +74,6 @@ export default defineComponent({
     };
 
     const handleMouseMove = (e) => {
-      console.log(e);
       applyParallax(e.clientX, e.clientY);
     };
 
@@ -132,7 +131,6 @@ $spawnHeight: 1080px;
 }
 
 @mixin star-template($numStars, $starSize) {
-  z-index: 10;
   width: $starSize;
   height: $starSize;
   border-radius: 50%;

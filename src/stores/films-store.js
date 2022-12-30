@@ -14,6 +14,7 @@ export const useFilmsStore = defineStore("films", () => {
     rowsNumber: 0,
     rowsPerPage: rowsPerPage,
   });
+  const cardFilm = ref(null);
 
   //actions
   const fetchFilms = (page = 1) => {
@@ -33,5 +34,12 @@ export const useFilmsStore = defineStore("films", () => {
       });
   };
 
-  return { films, rowsPerPageOptions, pagination, isLoading, fetchFilms };
+  return {
+    films,
+    cardFilm,
+    rowsPerPageOptions,
+    pagination,
+    isLoading,
+    fetchFilms,
+  };
 });

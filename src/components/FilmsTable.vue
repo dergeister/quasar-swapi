@@ -10,22 +10,16 @@
     :pagination-label="paginationLabel"
     :loading="isLoading"
     :loading-label="$t('table.loadingLabel')"
-    @request="onRequest"
+    @request="handleRequest"
+    @row-click="handleRowClick"
   >
     <template v-slot:loading>
       <q-inner-loading showing color="primary" />
     </template>
-    <template v-slot:body-cell-title="props">
-      <q-td :props="props">
-        <div class="tableClickable">
-          {{ props.value }}
-        </div>
-      </q-td>
-    </template>
   </q-table>
 </template>
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, defineEmits } from "vue";
 import { useI18n } from "vue-i18n";
 import { useFilmsStore } from "src/stores/films-store";
 import { storeToRefs } from "pinia";
@@ -33,11 +27,11 @@ import moment from "moment";
 
 export default defineComponent({
   name: "FilmsTable",
-  setup() {
+  setup(props, { emit }) {
     const { t } = useI18n();
     const filmsStore = useFilmsStore();
 
-    const { films, pagination, rowsPerPageOptions, isLoading } =
+    const { films, cardFilm, pagination, rowsPerPageOptions, isLoading } =
       storeToRefs(filmsStore);
 
     const columns = [
@@ -52,9 +46,6 @@ export default defineComponent({
         align: "left",
         label: t("resources.films.name"),
         field: "title",
-        format: (val) => {
-          return `Star Wars: ${val}`;
-        },
       },
       {
         name: "release_date",
@@ -76,10 +67,15 @@ export default defineComponent({
       });
     }
 
-    const onRequest = (requestProps) => {
+    const handleRequest = (requestProps) => {
       const { page } = requestProps.pagination;
 
       filmsStore.fetchFilms(page);
+    };
+
+    const handleRowClick = (event, row, index) => {
+      cardFilm.value = row;
+      emit("filmClick");
     };
 
     filmsStore.fetchFilms();
@@ -91,7 +87,8 @@ export default defineComponent({
       pagination,
       columns,
       paginationLabel,
-      onRequest,
+      handleRequest,
+      handleRowClick,
     };
   },
 });

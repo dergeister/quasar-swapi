@@ -1,15 +1,30 @@
 <template>
   <q-page class="flex flex-center">
-    <FilmsTable />
+    <FilmsCard ref="filmsCard" />
+    <FilmsTable @filmClick="handleTableRowClick" />
   </q-page>
 </template>
 
 <script>
+import { defineComponent, ref } from "vue";
 import FilmsTable from "src/components/FilmsTable.vue";
-import { defineComponent } from "vue";
+import FilmsCard from "src/components/Cards/FilmsCard.vue";
 
 export default defineComponent({
   name: "FilmsPage",
-  components: { FilmsTable },
+  components: { FilmsTable, FilmsCard },
+
+  setup() {
+    const filmsCard = ref(null);
+
+    const handleTableRowClick = () => {
+      filmsCard.value.openFilmsCard();
+    };
+
+    return {
+      filmsCard,
+      handleTableRowClick,
+    };
+  },
 });
 </script>
